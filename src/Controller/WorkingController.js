@@ -1,13 +1,20 @@
 import WeekdayWork from '../Model/WeekdayWork.js';
 import WeekendWork from '../Model/WeekendWork.js';
 import Working from '../Model/Working.js';
+import WorkingService from '../Service/WorkingService.js';
 import loopWhileValid from '../Util/loopWhileValid.js';
 import InputView from '../View/InputView.js';
+import OutputView from '../View/OutputView.js';
 
 class WorkingController {
   async run() {
     const working = await loopWhileValid(this.getWorking);
     const { weekdayWork, weekendWork } = await loopWhileValid(this.getWorks);
+
+    const workingService = new WorkingService(working, weekdayWork, weekendWork);
+    workingService.setWorkers();
+
+    OutputView.printWorking(working);
   }
 
   async getWorking() {

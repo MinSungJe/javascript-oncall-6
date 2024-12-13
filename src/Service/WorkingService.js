@@ -8,6 +8,13 @@ class WorkingService {
     this.weekdayWork = weekdayWork;
     this.weekendWork = weekendWork;
   }
+
+  setWorkers() {
+    this.working.days.forEach((day) => {
+      if (day.isDayOff) day.setWorker(this.weekendWork.getNextWorker());
+      else day.setWorker(this.weekdayWork.getNextWorker());
+    });
+  }
 }
 
 export default WorkingService;
