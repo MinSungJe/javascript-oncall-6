@@ -43,4 +43,9 @@ export const ListChecker = {
   isIncludesValue: (list, value) => {
     return list.includes(value);
   },
+
+  // 두 리스트의 모든 요소가 같은 지 체크
+  isSameElementList: (list1, list2) => {
+    return list1.length === list2.length && list2.every((item) => list1.includes(item));
+  },
 };
