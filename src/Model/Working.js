@@ -34,6 +34,13 @@ class Working {
     const dateIndex = (DATE_LIST.indexOf(startDate) + additionDay) % 7;
     return DATE_LIST[dateIndex];
   }
+
+  #setWorkers(weekdayWork, weekendWork) {
+    this.days.forEach((day) => {
+      if (day.isDayOff) day.setWorker(weekendWork.getNextWorker());
+      else day.setWorker(weekdayWork.getNextWorker());
+    });
+  }
 }
 
 export default Working;
