@@ -29,6 +29,11 @@ class WeekdayWork {
     this.lastIndex = (this.lastIndex + 1) % this.workerList.length;
     return this.workerList[prevIndex];
   }
+
+  getNextWorkerByName(name) {
+    const index = this.workerList.indexOf(name);
+    return this.workerList[(index + 1) % this.workerList.length];
+  }
 }
 
 export default WeekdayWork;

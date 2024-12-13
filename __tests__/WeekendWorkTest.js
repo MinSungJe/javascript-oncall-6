@@ -33,4 +33,9 @@ describe('WeekdayWork 객체 테스트', () => {
     expect(weekendWork.getNextWorker()).toBe('준팍');
     expect(weekendWork.getNextWorker()).toBe('루루');
   });
+
+  test('다음 근무자 닉네임을 이름으로 알 수 있다.', () => {
+    expect(weekendWork.getNextWorkerByName('고니')).toBe('도밥');
+    expect(weekendWork.getNextWorkerByName('준팍')).toBe('루루');
+  });
 });

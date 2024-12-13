@@ -41,7 +41,7 @@ class WorkingService {
     const isDayoff = this.working.days[dayIndex].isDayOff;
     const { closeIndex, closeWorker } = this.#getCloseWorker(dayIndex, isDayoff);
     this.working.days[dayIndex].worker = closeWorker;
-    this.working.days[closeIndex].worker = worker;
+    if (closeIndex !== -1) this.working.days[closeIndex].worker = worker;
   }
 
   #getCloseWorker(dayIndex, isDayOff) {
@@ -55,7 +55,15 @@ class WorkingService {
       return { closeIndex, closeWorker };
     }
 
-    if (closeIndex === -1) return { closeIndex: -1, closeWorker: '민성제' };
+    return {
+      closeIndex: -1,
+      closeWorker: this.#getNextWorker(isDayOff),
+    };
+  }
+
+  #getNextWorker(isDayOff) {
+    if (isDayOff) return this.weekendWork.getNextWorkerByName(this.working.days[dayIndex].worker);
+    return this.weekdayWork.getNextWorkerByName(this.working.days[dayIndex].worker);
   }
 }
 
